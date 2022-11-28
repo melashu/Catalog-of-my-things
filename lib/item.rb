@@ -13,7 +13,8 @@ class Item
     def can_be_archived?
       today = DateTime.now
       target_year = 10 * 365
-      return true (today - @publish_date).to_i >= target_year 
+      diff = today - @publish_date
+      return true diff.to_i >= target_year 
 
       false
     end
