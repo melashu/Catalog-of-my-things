@@ -21,10 +21,10 @@ class App
     option_list = {
       #  '1' => display_books,
       '2' => method(:display_music_albums),
-      '3' => method(:display_genres),
+      '4' => method(:display_genres),
       # '4' => display_labels, '5' => list_source,
       # '6' => create_book,
-      '7' => method(:create_music_album)
+      '9' => method(:create_music_album)
       # '8' => create_game,
       # '9' => display_author, '10' => display_game
     }
@@ -78,8 +78,11 @@ class App
 
     albums.each do |album|
       music_album = JSON.parse(album, create_additions: true)
-      puts "Name: #{music_album.name}, Publication date: #{music_album.publish_date}, Only spotify: #{music_album.only_spotify}"
+      print "Name: #{music_album.name} "
+      print " Publication date: #{music_album.publish_date}"
+      print "Only spotify: #{music_album.only_spotify}"
     end
+    puts
     puts '=' * 60
   end
 
