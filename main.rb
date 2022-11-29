@@ -10,9 +10,11 @@ class Main
       display_options
       option = enter_input
 
+      if option.to_i.zero?
+        puts 'Thank you for using our app, see again👋'
+        break
+      end
       @app.run(option)
-
-      break if option.zero?
     end
   end
 
@@ -32,11 +34,11 @@ class Main
 
   def enter_input
     print 'Enter a number: '
-    option = gets.chomp.to_i
-    while option.nil? || option.negative? || option > 11
+    option = gets.chomp
+    while option.nil? || option.to_i.negative? || option.to_i >= 11
       puts 'Please enter a number between 1 and 10!'
       print 'Enter a number: '
-      option = gets.chomp.to_i
+      option = gets.chomp
     end
     option
   end
