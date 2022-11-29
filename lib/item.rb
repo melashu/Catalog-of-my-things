@@ -23,7 +23,3 @@ class Item
     can_be_archived == true
   end
 end
-
-item = Item.new(Date.new(2018, 10, 0o2), false)
-
-puts item.can_be_archived?
