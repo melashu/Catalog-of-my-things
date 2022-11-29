@@ -18,4 +18,9 @@ class Item
 
       false
     end
+
+    def move_to_archive?
+     can_be_archived == true
+   
+    end
 end
