@@ -1,4 +1,5 @@
 require 'date'
+require_relative './genre'
 class Item
   attr_accessor :publish_date
   attr_reader :archived
@@ -7,6 +8,8 @@ class Item
     @id = Random.rand(1..1000)
     @publish_date = publish_date
   end
+
+  private
 
   def can_be_archived?
     today = DateTime.now
