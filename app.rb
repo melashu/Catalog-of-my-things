@@ -8,14 +8,7 @@ require 'date'
 
 class App
   def initialize
-    @books = []
-    @labels = []
-    @albums = []
-    @genres = []
-    @authors = []
-    @games = []
-    @sources = []
-    @data = PersistData.new
+      @data = PersistData.new
   end
 
   def run(option)
