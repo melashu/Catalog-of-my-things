@@ -3,6 +3,10 @@ require_relative './lib/music_album'
 require_relative './lib/genre'
 require_relative './lib/genre_additions'
 require_relative './lib/music_album_additions'
+require_relative './lib/book'
+require_relative './lib/book_addtion'
+require_relative './lib/label'
+require_relative './lib/label_addtion'
 require 'date'
 require 'json'
 class App
@@ -19,11 +23,12 @@ class App
 
   def run(option)
     option_list = {
-      #  '1' => display_books,
+      '1' => method(:display_books),
       '2' => method(:display_music_albums),
       '4' => method(:display_genres),
-      # '4' => display_labels, '5' => list_source,
-      # '6' => create_book,
+      '5' => method(:display_labels),
+      # '5' => list_source,
+      '8' => method(:create_book),
       '9' => method(:create_music_album)
       # '8' => create_game,
       # '9' => display_author, '10' => display_game
@@ -41,9 +46,6 @@ class App
     date = gets.chomp
     date_parsed = Date.parse(date)
     only_spotify = reander_boolean
-
-    puts date_parsed
-    puts only_spotify
 
     music_album = MusicAlbum.new(date_parsed, only_spotify, name)
     gener = Genre.new(gener_name)
@@ -95,5 +97,59 @@ class App
       puts "Genre Name: #{genre_list.name}"
     end
     puts '=' * 30
+  end
+
+  def create_book
+    puts 'Add Publisher:'
+    publisher = gets.chomp
+    puts 'Add Cover State (good or bad):'
+    cover_state = gets.chomp
+    print 'Add publication date: as YYYY-MM-DD: '
+    date = gets.chomp
+    puts 'Add Label Title: '
+    title = gets.chomp
+    puts 'Add Color: '
+    color = gets.chomp
+    publish_date = Date.parse(date)
+
+    books = Book.new(publisher, cover_state, publish_date)
+    label = Label.new(title, color)
+
+    puts 'Book created successfully\n'
+
+    book_json = JSON.generate(books)
+    @data.write_date('books.json', book_json)
+
+    label_json = JSON.generate(label)
+    @data.write_date('label.json', label_json)
+  end
+
+  def display_books
+    books = @data.read_date('books.json')
+    puts '=' * 80
+    puts 'You have no books yet' if books.size.zero?
+
+    books.each do |book|
+      published_book = JSON.parse(book, create_additions: true)
+      print "publisher: #{published_book.publisher} "
+      print "cover state: #{published_book.cover_state} "
+      print " Publication date: #{published_book.publish_date}"
+      puts
+    end
+    puts '=' * 80
+  end
+
+  def display_labels
+    labels = @data.read_date('label.json')
+    puts '=' * 80
+    puts 'You have no label yet' if labels.size.zero?
+
+    labels.each do |label|
+      assigned_label = JSON.parse(label, create_additions: true)
+      print "Title: #{assigned_label.title} "
+      print "Color: #{assigned_label.color} "
+      puts
+    end
+    puts '=' * 80
   end
 end

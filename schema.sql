@@ -1,9 +1,9 @@
-CREATE TABLE IF NOT EXISTS music_albums (
+CREATE TABLE IF NOT EXISTS music_album (
     id SERIAL PRIMARY KEY,
-    genre VARCHAR(50) NOT NULL,
-    author VARCHAR(50) NOT NULL,
-    source VARCHAR(50) NOT NULL,
-    lable VARCHAR(50) NOT NULL,
+    genre VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    source VARCHAR(255) NOT NULL,
+    lable VARCHAR(255) NOT NULL,
     publish_date DATE NOT NULL,
     archived boolean
 );
@@ -11,8 +11,28 @@ CREATE TABLE IF NOT EXISTS music_albums (
 CREATE TABLE IF NOT EXISTS genre (
     id SERIAL PRIMARY KEY,
     music_albums_id integer,
-    genre_name VARCHAR(50) NOT NULL,
-    CONSTRAINT music_genre FOREIGN KEY(music_albums_id) REFERENCES music_albums (id));
+    genre_name VARCHAR(255) NOT NULL,
+    CONSTRAINT music_genre FOREIGN KEY(music_albums_id) REFERENCES music_album (id));
+
+
+CREATE TABLE IF NOT EXISTS label (
+    id SERIAL PRIMARY KEY,
+    label_id integer,
+    title VARCHAR(255) NOT NULL,
+    color VARCHAR(255)
+    CONSTRAINT label_fk FOREIGN KEY(label_id) REFERENCES book (id));
+
+CREATE TABLE IF NOT EXISTS book (
+    id SERIAL PRIMARY KEY,
+    genre VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    source VARCHAR(255) NOT NULL,
+    lable VARCHAR(255) NOT NULL,
+    publish_date DATE NOT NULL,
+    publisher VARCHAR(255) NOT NULL
+    cover_state VARCHAR(255) NOT NULL
+    archived boolean
+);
 
 
 
