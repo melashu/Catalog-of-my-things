@@ -5,7 +5,8 @@ class PersistData
     @path = "#{Dir.pwd}/data"
   end
 
-  def write_date(file_name, data)
+  def write_date(file_name, data, msg = '')
+    puts msg
     File.write("#{@path}/#{file_name}", "#{data}\n", mode: 'a')
   end
 
