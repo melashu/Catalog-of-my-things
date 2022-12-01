@@ -15,7 +15,7 @@ describe Book do
     end
   end
 
-  it 'can_be_archived? should return false' do
+  it 'can_be_archived? should return true' do
     expect(@book1.can_be_archived?).to be true
   end
 end
