@@ -8,7 +8,7 @@ require 'date'
 
 class App
   def initialize
-      @data = PersistData.new
+    @data = PersistData.new
   end
 
   def run(option)
