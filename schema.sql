@@ -1,22 +1,24 @@
 CREATE TABLE IF NOT EXISTS authors (
   id BIGSERIAL NOT NULL PRIMARY KEY,
+  game_id integer,
   first_name VARCHAR(255),
   last_name VARCHAR(255),
-  FOREIGN KEY(item_id) REFERENCES item(id)
-);
+  CONSTRAINT game_fk FOREIGN KEY(game_id) REFERENCES games (id));
+
 CREATE TABLE IF NOT EXISTS games (
   id INT,
   multiplayer BOOLEAN,
   last_played_at DATE,
+  genre VARCHAR(255) NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  lable VARCHAR(255) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY(game_id) REFERENCES games(id),
-  FOREIGN KEY(author_id) REFERENCES authors(id)
 )
+
 CREATE TABLE IF NOT EXISTS music_album (
     id SERIAL PRIMARY KEY,
     genre VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
-    source VARCHAR(255) NOT NULL,
     lable VARCHAR(255) NOT NULL,
     publish_date DATE NOT NULL,
     archived boolean
@@ -40,7 +42,6 @@ CREATE TABLE IF NOT EXISTS book (
     id SERIAL PRIMARY KEY,
     genre VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
-    source VARCHAR(255) NOT NULL,
     lable VARCHAR(255) NOT NULL,
     publish_date DATE NOT NULL,
     publisher VARCHAR(255) NOT NULL
